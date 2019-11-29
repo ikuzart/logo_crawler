@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-setup(name="logo_finder",
+setup(name="logo_crawler",
       version="0.0.1",
       description="Logo images crawler",
       url="https://github.com/ikuzart/logo_finder",
