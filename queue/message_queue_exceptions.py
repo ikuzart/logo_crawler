@@ -1,3 +1,0 @@
-
-class MqException(Exception):
-    pass
