@@ -1,5 +1,4 @@
 import re
-from abc import ABCMeta, abstractmethod
 from typing import Optional
 
 from bs4 import BeautifulSoup
@@ -10,27 +9,32 @@ from logo_crawler.helpers import get_logger
 
 logger = get_logger()
 
+
 SIGNATURES = \
-    [{"tag": "meta", "attr":{"property": "og:image", "itemprop": "image primaryImageOfPage"}, "to_get": "content"},
-     {"tag": "meta", "attr":{"itemprop": "logo"}, "to_get": "content"},
-     {"tag": "link", "attr":{"rel": "logo"}, "to_get": "src"},
-     {"tag": "img", "attr":{"alt": "logo"}, "to_get": "src"},
-     {"tag": "img", "attr":{"class_": "logo"}, "to_get": "src"},
-     {"tag": "img", "attr":{"alt": re.compile(".*_logo")}, "to_get": "src"},
-     {"tag": "img", "attr": {"alt": re.compile(".*-logo")}, "to_get": "src"}
+    [{"tag": "meta", "attr":{"property": "og:image", "itemprop": "image primaryImageOfPage"},
+      "to_get": "content", "weight": 0.9},
+     {"tag": "meta", "attr":{"itemprop": "logo"}, "to_get": "content", "weight": 0.9},
+     {"tag": "link", "attr":{"rel": "logo"}, "to_get": "src", "weight": 0.9},
+     {"tag": "img", "attr":{"alt": "logo"}, "to_get": "src", "weight": 0.9},
+     {"tag": "img", "attr":{"class_": "logo"}, "to_get": "src", "weight": 0.9},
+     {"tag": "img", "attr":{"alt": re.compile(".*_logo")}, "to_get": "src", "weight": 0.5},
+     {"tag": "img", "attr": {"alt": re.compile(".*-logo")}, "to_get": "src", "weight": 0.5},
+     {"tag": "img", "attr":{"alt": re.compile(".*_logo_.*")}, "to_get": "src", "weight": 0.5},
+     {"tag": "img", "attr": {"alt": re.compile(".*-logo_.*")}, "to_get": "src", "weight": 0.5}
     ]
 
 
-class LogoFinderContract(metaclass=ABCMeta):
-
-    @abstractmethod
-    def search(self, html_page: HTMLPage, signatures: list):
-        pass
-
-
-class LogoFinder(LogoFinderContract):
+class SocialMediaLogo:
     """
-    Searches for logo image signatures on given HTML page
+    Ideally we could have additional information associated with url like social networks.
+    so we could obtain company logo from it, it have advantages of unified size and format.
+    """
+    pass
+
+
+class LogoFinder:
+    """
+    Searches for logo image signatures on given HTML page, selects first with highest weight.
     """
 
     def search(self, html_page: HTMLPage, signatures: list = SIGNATURES) -> Optional[str]:

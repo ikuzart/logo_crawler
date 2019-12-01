@@ -6,10 +6,8 @@ from logo_crawler.html_page import *
 
 __all__ = ["HTMLPage",
            "SeedContract",
-           "DownloaderContract",
            "SeedFromCsv",
            "Downloader",
-           "LogoFinderContract",
            "LogoFinder",
            "WriterContract",
            "CsvWriter"]

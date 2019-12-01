@@ -10,6 +10,17 @@ LogoFinder -  Searches for Signatures on HTML page
 Signature - Some rule for tag, which helps identify logo
 
 
+### Scaling
+More scalabble and better suited version for production will be splitted to smaller parts which will be communicating 
+with each other by Message Queue (some additional service is needed, RabbitMq for example).
+
+Downloader will be taking url from message queue, processing it and putting downloaded page to another message queue.
+
+LogoFinder will be taking downloaded page from queue process it and put for message queue for saving to csv, db, etc.
+
+By this approach we could have many instances of Downloader and LogoFinder working in parallel
+
+
 ### How to run
 ```python3 logo_crawler.crawler.py domains.csv```
 where domains.csv is a list with urls

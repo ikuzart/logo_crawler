@@ -1,5 +1,4 @@
 import threading
-from abc import ABCMeta, abstractmethod
 from typing import Optional
 
 import requests
@@ -11,13 +10,7 @@ from logo_crawler.html_page import HTMLPage
 logger = get_logger()
 
 
-class DownloaderContract(metaclass=ABCMeta):
-    @abstractmethod
-    def download(self, url: str) -> Optional[HTMLPage]:
-        pass
-
-
-class Downloader(DownloaderContract):
+class Downloader:
     """Downloader gets url as a str and send request to this url and process response
        This realisation is straightforward, if we don't get response 200, just return None
 
