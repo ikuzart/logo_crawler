@@ -19,7 +19,11 @@ class Downloader:
     """
     @staticmethod
     def _get_response(url: str) -> requests.Response:
-        return requests.get(url)
+        try:
+            response = requests.get(url)
+            return response
+        except Exception as e:
+            logger.exception(e)
 
     def use_cache(self):
         pass

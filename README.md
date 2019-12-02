@@ -22,7 +22,7 @@ By this approach we could have many instances of Downloader and LogoFinder worki
 
 
 ### How to run
-```python3 logo_crawler/crawler.py domains.csv```
+```python3 logo_crawler/main.py domains.csv```
 where domains.csv is a list with urls
 
 

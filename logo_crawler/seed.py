@@ -19,3 +19,9 @@ class SeedFromCsv(SeedContract):
         with open(self.csv_path, 'r') as csv_file:
             for row in csv.reader(csv_file):
                 yield row[0]
+
+
+class SeedFromMessageQueue(SeedContract):
+
+    def get_next_url(self) -> str:
+        pass

@@ -4,7 +4,7 @@ import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..')))
 from logo_crawler import HTMLPage, SeedFromCsv, CsvWriter, Downloader, LogoFinder
-from logo_crawler.settings import MAX_WORKERS, OUTPUT_FILE
+from logo_crawler.settings import MAX_WORKERS, OUTPUT_CSV
 from logo_crawler.helpers import get_logger
 
 
@@ -29,7 +29,8 @@ def main():
             if not html_page.text:
                 continue
             html_page.logo_url = logo_finder.search(html_page)
-            csv_writer.write_to_output(html_page, OUTPUT_FILE)
+            csv_writer.write_to_output(html_page, OUTPUT_CSV)
+
 
 if __name__ == '__main__':
     try:

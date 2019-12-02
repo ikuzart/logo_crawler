@@ -10,6 +10,14 @@ from logo_crawler.helpers import get_logger
 logger = get_logger()
 
 
+"""
+To find logo image, let's search for a tag with specific attributes,
+There are tags which most certainly identify logo like 'meta'.
+
+
+I'm not sure how correctly identify relevance of found logo image, only if we check manually result for each signature,
+then we can calculate precision recall for the signature and assign some wight to it.
+"""
 SIGNATURES = \
     [{"tag": "meta", "attr":{"property": "og:image", "itemprop": "image primaryImageOfPage"},
       "to_get": "content", "weight": 0.9},
